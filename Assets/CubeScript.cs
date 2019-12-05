@@ -6,10 +6,10 @@ public class CubeScript : MonoBehaviourPunCallbacks
     public float speed = 1.0f;
     public float jumpPower = 20.0f;
     public float buttobiPower = 50.0f;
-    public Rigidbody rb;
+    private Rigidbody rb;
 
     // プレイヤーのポジション
-    private Vector3 Player_pos; 
+    private Vector3 Player_pos;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +17,7 @@ public class CubeScript : MonoBehaviourPunCallbacks
         this.rb = this.GetComponent<Rigidbody>();
 
         //最初の時点でのプレイヤーのポジションを取得
-        Player_pos = GetComponent<Transform>().position; 
+        Player_pos = GetComponent<Transform>().position;
     }
     // Update is called once per frame
     void Update()
