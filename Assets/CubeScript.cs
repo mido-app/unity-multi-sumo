@@ -50,14 +50,14 @@ public class CubeScript : MonoBehaviourPunCallbacks
 
         //プレイヤーがどの方向に進んでいるかがわかるように、初期位置と現在地の座標差分を取得
         Vector3 diff = transform.position - Player_pos; 
-        Quaternion lockRotation = Quaternion.LookRotation(diff, Vector3.up);
         if (diff.magnitude > 0.01f) //ベクトルの長さが0.01fより大きい場合にプレイヤーの向きを変える処理を入れる(0では入れないので）
         {
+            Quaternion lockRotation = Quaternion.LookRotation(diff, Vector3.up);
             lockRotation.x = 0;
             lockRotation.z = 0;
             transform.rotation = Quaternion.Lerp(transform.rotation, lockRotation, 0.1f);
+            Player_pos = transform.position;
         }
-        Player_pos = transform.position;
     }
     private void OnCollisionEnter(Collision collision)
     {
