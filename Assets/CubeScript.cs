@@ -11,9 +11,15 @@ public class CubeScript : MonoBehaviourPunCallbacks
     // プレイヤーのポジション
     private Vector3 Player_pos;
 
+    public FixedJoystick fixedJoystick;
+
     // Start is called before the first frame update
     void Start()
     {
+        var v = new Vector3(Random.Range(-4.0f, 4.0f), 0.5f, Random.Range(-4.0f, 4.0f));
+        this.transform.position = v;
+        this.GetComponent<Renderer>().material.color = Random.ColorHSV();
+
         this.rb = this.GetComponent<Rigidbody>();
 
         //最初の時点でのプレイヤーのポジションを取得
@@ -47,6 +53,13 @@ public class CubeScript : MonoBehaviourPunCallbacks
         {
             rb.AddForce(0, jumpPower, 0);
         }
+
+
+        // ジョイコン操作時                
+        Debug.Log("Horizontal : "+ fixedJoystick.Horizontal);
+        Vector3 direction = (Vector3.forward * fixedJoystick.Vertical + Vector3.right * fixedJoystick.Horizontal)/30;
+        rb.AddForce(direction * speed * Time.deltaTime, ForceMode.VelocityChange);
+
 
         //プレイヤーがどの方向に進んでいるかがわかるように、初期位置と現在地の座標差分を取得
         Vector3 diff = transform.position - Player_pos; 
