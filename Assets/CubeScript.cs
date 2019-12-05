@@ -1,5 +1,7 @@
-﻿using UnityEngine;
-public class CubeScript : MonoBehaviour
+﻿using Photon.Pun;
+using UnityEngine;
+
+public class CubeScript : MonoBehaviourPunCallbacks
 {
     public float speed = 1.0f;
     public float jumpPower = 20.0f;
@@ -13,46 +15,26 @@ public class CubeScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (this.name != "Rikishi") return;
-        //this.moveByTransform();
+        if (!photonView.IsMine) return;
         this.moveByRiditBody();
-    }
-    void moveByTransform()
-    {
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            transform.position += transform.forward * Time.deltaTime;
-        }
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            transform.position -= transform.forward * speed * Time.deltaTime;
-        }
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            transform.position -= transform.right * speed * Time.deltaTime;
-        }
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            transform.position += transform.right * speed * Time.deltaTime;
-        }
     }
     void moveByRiditBody()
     {
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            rb.AddForce(0, 0, speed);
+            rb.AddForce(0, 0, speed * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            rb.AddForce(0, 0, -speed);
+            rb.AddForce(0, 0, -speed * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            rb.AddForce(-speed, 0, 0);
+            rb.AddForce(-speed * Time.deltaTime, 0, 0);
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            rb.AddForce(speed, 0, 0);
+            rb.AddForce(speed * Time.deltaTime, 0, 0);
         }
         if (Input.GetKey(KeyCode.Space))
         {
@@ -62,9 +44,9 @@ public class CubeScript : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag != "Player") return;
-        var vector = this.transform.position - collision.gameObject.transform.position;
+        var vector = collision.gameObject.transform.position - this.transform.position;
         var unitVector = vector / Vector3.Magnitude(vector);
-        var speedVector = unitVector * buttobiPower;
-        collision.gameObject.GetComponent<Rigidbody>().AddForce(speedVector);
+        var speedVector = unitVector * buttobiPower * Vector3.Magnitude(this.rb.velocity);
+        collision.gameObject.GetComponent<Rigidbody>().AddForce(speedVector, ForceMode.Impulse);
     }
 }
