@@ -1,12 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameSystem : MonoBehaviour
 {
-	public void StartGame()
+    public void StartGame()
     {
-		SceneManager.LoadScene("SampleScene");
-	}
+        GameObject.FindGameObjectWithTag("SEController").GetComponent<SEController>().PlayIyoponSE();
+        GameObject.FindGameObjectWithTag("FadeoutPanel").GetComponent<FadeoutPanel>().StartFadeout();
+        Invoke("LoadNextScene", 4.5f);
+    }
+
+    public void LoadNextScene()
+    {
+        SceneManager.LoadScene("SampleScene");
+    }
 }
