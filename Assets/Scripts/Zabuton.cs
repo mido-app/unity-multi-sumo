@@ -14,14 +14,7 @@ public class Zabuton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this._moveSpeed = Random.Range(this.moveSpeedMin, this.moveSpeedMax);
-        var playerObjList = GameObject.FindGameObjectsWithTag("Player");
-        var targetPlayer = playerObjList[Random.Range(0, playerObjList.Length - 1)];
-        var directionVector = targetPlayer.transform.position - this.transform.position;
-        directionVector.y = 0;
-        var directionUnitVector = directionVector / Vector3.Magnitude(directionVector);
-        this._moveToward = directionUnitVector * 30;
-        this._moveToward.y = 1.5f;
+        this.Activate();
     }
 
     // Update is called once per frame
@@ -38,6 +31,18 @@ public class Zabuton : MonoBehaviour
     public void SetZabutonSpawner(ZabutonSpawner spawner)
     {
         this._spawnBy = spawner;
+    }
+
+    public void Activate()
+    {
+        this._moveSpeed = Random.Range(this.moveSpeedMin, this.moveSpeedMax);
+        var playerObjList = GameObject.FindGameObjectsWithTag("Player");
+        var targetPlayer = playerObjList[Random.Range(0, playerObjList.Length - 1)];
+        var directionVector = targetPlayer.transform.position - this.transform.position;
+        directionVector.y = 0;
+        var directionUnitVector = directionVector / Vector3.Magnitude(directionVector);
+        this._moveToward = directionUnitVector * 30;
+        this._moveToward.y = 1.5f;
     }
 
     public void Deactivate()

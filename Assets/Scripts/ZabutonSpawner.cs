@@ -27,13 +27,15 @@ public class ZabutonSpawner : MonoBehaviour
 
         if (this._spendTimeAfterPrevSpawn >= this._nextSpawnSpan)
         {
-            Debug.Log("Zabuton Spawn");
+            Debug.Log("zabuton spawn");
             var zabutonObj = this.GetOrCreateZabutonFromPool();
             var vector = new Vector3(Random.Range(-1.0f, 1.0f), 0, Random.Range(-1.0f, 1.0f));
             var unitVector = vector / Vector3.Magnitude(vector);
             var zabutonPosition = new Vector3(unitVector.x * spawnPointRadius, 1.5f, unitVector.z * spawnPointRadius);
             zabutonObj.transform.position = zabutonPosition;
             zabutonObj.SetActive(true);
+            zabutonObj.GetComponent<Zabuton>().Activate();
+            zabutonObj.GetComponent<Zabuton>().SetZabutonSpawner(this);
             this._spendTimeAfterPrevSpawn = 0.0f;
             this._nextSpawnSpan = Random.Range(this.spawnSpanMin, this.spawnSpanMax);
         }
@@ -44,12 +46,12 @@ public class ZabutonSpawner : MonoBehaviour
         if (this._inactiveZabutonList.Count == 0)
         {
             var zabuton = PhotonNetwork.Instantiate("Zabuton", Vector3.zero, Quaternion.identity);
-            zabuton.GetComponent<Zabuton>().SetZabutonSpawner(this);
             return zabuton;
         }
         else
         {
-            return this._inactiveZabutonList.Pop();
+            var zabuton = this._inactiveZabutonList.Pop();
+            return zabuton;
         }
     }
 
