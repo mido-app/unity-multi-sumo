@@ -15,11 +15,11 @@ public class ArmScript : MonoBehaviour
     
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Arm");
-        if (collision.gameObject.tag != "Player") return;
-        var vector = collision.gameObject.transform.position - this.transform.position;
-        var unitVector = vector / Vector3.Magnitude(vector);
-        var speedVector = unitVector * tuppariPower;
-        collision.gameObject.GetComponent<Rigidbody>().AddForce(speedVector, ForceMode.Impulse);
+        // Debug.Log("Arm");
+        // if (collision.gameObject.tag != "Player") return;
+        // var vector = collision.gameObject.transform.position - this.transform.position;
+        // var unitVector = vector / Vector3.Magnitude(vector);
+        // var speedVector = unitVector * tuppariPower;
+        // collision.gameObject.GetComponent<Rigidbody>().AddForce(speedVector, ForceMode.Impulse);
     }
 }
