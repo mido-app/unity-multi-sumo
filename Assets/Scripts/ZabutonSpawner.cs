@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Photon.Pun;
+using UnityEngine;
 
 public class ZabutonSpawner : MonoBehaviour
 {
@@ -18,14 +19,17 @@ public class ZabutonSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!PhotonNetwork.IsMasterClient) return;
+
         this._spendTimeAfterPrevSpawn += Time.deltaTime;
 
         if (this._spendTimeAfterPrevSpawn >= this._nextSpawnSpan)
         {
-            var zabutonObj = GameObject.Instantiate(this.zabutonPrehub);
+            //var zabutonObj = GameObject.Instantiate(this.zabutonPrehub);
             var vector = new Vector3(Random.Range(-1.0f, 1.0f), 0, Random.Range(-1.0f, 1.0f));
             var unitVector = vector / Vector3.Magnitude(vector);
-            zabutonObj.transform.position = new Vector3(unitVector.x * spawnPointRadius, 1.5f, unitVector.z * spawnPointRadius);
+            var zabutonPosition = new Vector3(unitVector.x * spawnPointRadius, 1.5f, unitVector.z * spawnPointRadius);
+            var zabutonObj = PhotonNetwork.Instantiate("Zabuton", zabutonPosition, Quaternion.identity);
             this._spendTimeAfterPrevSpawn = 0.0f;
             this._nextSpawnSpan = Random.Range(this.spawnSpanMin, this.spawnSpanMax);
         }

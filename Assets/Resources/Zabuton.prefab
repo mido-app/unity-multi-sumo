@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 1264385996617621248}
   - component: {fileID: 3633741619364970780}
   - component: {fileID: 5559200616226057896}
+  - component: {fileID: 114826277524662622}
+  - component: {fileID: 114355901862106248}
   m_Layer: 0
   m_Name: Zabuton
   m_TagString: Zabuton
@@ -104,8 +106,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15b24eca3fa922746acc5c640b8b9f6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeedMin: 0.1
-  moveSpeedMax: 0.2
+  moveSpeedMin: 0.05
+  moveSpeedMax: 0.1
   rotetionSpeed: 10
   _moveSpeed: 0
   _moveToward: {x: 0, y: 0, z: 0}
+--- !u!114 &114826277524662622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700975781504631937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &114355901862106248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700975781504631937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
