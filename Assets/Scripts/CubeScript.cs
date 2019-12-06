@@ -18,6 +18,12 @@ public class CubeScript : MonoBehaviourPunCallbacks
     // プレイヤーのポジション
     private Vector3 Player_pos;
 
+    // 
+    private Vector3 touchStartPos;
+	private Vector3 touchEndPos;
+    private bool isTouch = false;
+
+
     // 初期スケール
     private Vector3 defaultScale;
 
@@ -66,6 +72,28 @@ public class CubeScript : MonoBehaviourPunCallbacks
         {
             this.OnDeathblow();
         }
+
+
+        if (Input.GetKeyDown (KeyCode.Mouse0) && !isTouch) {
+            touchStartPos = new Vector3 (Input.mousePosition.x,
+				0,
+				Input.mousePosition.y);
+		}
+        if (Input.GetKey (KeyCode.Mouse0)) {
+            touchEndPos = new Vector3 (Input.mousePosition.x,
+				0,
+				Input.mousePosition.y);
+            isTouch = true;
+            Vector3 mousePosDiff = touchEndPos - touchStartPos;
+            if(mousePosDiff.magnitude > 0.01f){
+                rb.AddForce(mousePosDiff / mousePosDiff.magnitude *  speed * Time.deltaTime);
+            }
+		}
+		if (Input.GetKeyUp (KeyCode.Mouse0)) {
+            isTouch = false;
+		}
+
+        
 
         //プレイヤーがどの方向に進んでいるかがわかるように、初期位置と現在地の座標差分を取得
         Vector3 diff = transform.position - Player_pos;
