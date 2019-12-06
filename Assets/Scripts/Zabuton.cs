@@ -6,8 +6,10 @@ public class Zabuton : MonoBehaviour
     public float moveSpeedMax;
     public float rotetionSpeed = 10f;
 
-    public float _moveSpeed;
-    public Vector3 _moveToward;
+    private float _moveSpeed;
+    private Vector3 _moveToward;
+
+    private ZabutonSpawner _spawnBy;
 
     // Start is called before the first frame update
     void Start()
@@ -27,9 +29,19 @@ public class Zabuton : MonoBehaviour
     {
         if (this.transform.position == this._moveToward)
         {
-            Destroy(this.gameObject);
+            this.Deactivate();
         }
         this.transform.position = Vector3.MoveTowards(this.transform.position, this._moveToward, this._moveSpeed);
         this.transform.Rotate(new Vector3(0, this.rotetionSpeed, 0));
+    }
+
+    public void SetZabutonSpawner(ZabutonSpawner spawner)
+    {
+        this._spawnBy = spawner;
+    }
+
+    public void Deactivate()
+    {
+        this._spawnBy.Deactivate(this);
     }
 }
