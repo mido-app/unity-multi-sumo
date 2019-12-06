@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TuppariScript : MonoBehaviour
 {
@@ -15,8 +13,9 @@ public class TuppariScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.A)) {
-			animator.SetTrigger("TuppariTrigger");
-		}
+        if (this.gameObject.GetComponentInParent<CubeScript>().IsMine && Input.GetKeyDown(KeyCode.Z))
+        {
+            animator.SetTrigger("TuppariTrigger");
+        }
     }
 }

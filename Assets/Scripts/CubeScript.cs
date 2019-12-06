@@ -21,6 +21,8 @@ public class CubeScript : MonoBehaviourPunCallbacks
     // 初期スケール
     private Vector3 defaultScale;
 
+    public bool IsMine { get { return photonView.IsMine; } }
+
     // Start is called before the first frame update
     void Start()
     {
