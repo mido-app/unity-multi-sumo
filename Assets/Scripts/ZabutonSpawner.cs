@@ -27,7 +27,6 @@ public class ZabutonSpawner : MonoBehaviour
 
         if (this._spendTimeAfterPrevSpawn >= this._nextSpawnSpan)
         {
-            Debug.Log("zabuton spawn");
             var zabutonObj = this.GetOrCreateZabutonFromPool();
             var vector = new Vector3(Random.Range(-1.0f, 1.0f), 0, Random.Range(-1.0f, 1.0f));
             var unitVector = vector / Vector3.Magnitude(vector);
@@ -57,7 +56,6 @@ public class ZabutonSpawner : MonoBehaviour
 
     public void Deactivate(Zabuton zabuton)
     {
-        Debug.Log("Deactivate");
         this._inactiveZabutonList.Push(zabuton.gameObject);
         zabuton.gameObject.SetActive(false);
     }
