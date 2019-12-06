@@ -2,7 +2,9 @@
 
 public class SEController : MonoBehaviour
 {
-    public AudioClip[] seClipList;
+    public AudioClip[] attackSeList;
+    public AudioClip deathbloSeList;
+
     private AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
@@ -18,6 +20,11 @@ public class SEController : MonoBehaviour
 
     public void PlayRandomAttackSE()
     {
-        this.audioSource.PlayOneShot(this.seClipList[Random.Range(0, this.seClipList.Length - 1)]);
+        this.audioSource.PlayOneShot(this.attackSeList[Random.Range(0, this.attackSeList.Length - 1)]);
+    }
+
+    public void PlayDeathblowSE()
+    {
+        this.audioSource.PlayOneShot(this.deathbloSeList);
     }
 }

@@ -9,8 +9,17 @@ public class CubeScript : MonoBehaviourPunCallbacks
     private Rigidbody rb;
     private SEController seController;
 
+    // 必殺技関連
+    public static readonly string DEATHBLOW_NO_POWER = "DEATHBLOW_NO_POWER";
+    public static readonly string DEATHBLOW_CAN_USE = "DEATHBLOW_CAN_USE";
+    public static readonly string DEATHBLOW_USING = "DEATHBLOW_USING";
+    private string deathBlowStatus = DEATHBLOW_NO_POWER;
+
     // プレイヤーのポジション
     private Vector3 Player_pos;
+
+    // 初期スケール
+    private Vector3 defaultScale;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +29,8 @@ public class CubeScript : MonoBehaviourPunCallbacks
 
         //最初の時点でのプレイヤーのポジションを取得
         Player_pos = GetComponent<Transform>().position;
+
+        this.defaultScale = this.transform.localScale;
     }
     // Update is called once per frame
     void Update()
@@ -49,6 +60,10 @@ public class CubeScript : MonoBehaviourPunCallbacks
         {
             rb.AddForce(0, jumpPower, 0);
         }
+        if (Input.GetKey(KeyCode.X) && this.deathBlowStatus == DEATHBLOW_CAN_USE)
+        {
+            this.OnDeathblow();
+        }
 
         //プレイヤーがどの方向に進んでいるかがわかるように、初期位置と現在地の座標差分を取得
         Vector3 diff = transform.position - Player_pos;
@@ -74,5 +89,27 @@ public class CubeScript : MonoBehaviourPunCallbacks
         {
             this.seController.PlayRandomAttackSE();
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Zabuton" && this.deathBlowStatus == DEATHBLOW_NO_POWER)
+        {
+            this.deathBlowStatus = DEATHBLOW_CAN_USE;
+        }
+    }
+
+    private void OnDeathblow()
+    {
+        this.transform.localScale = this.defaultScale * 1.5f;
+        this.deathBlowStatus = DEATHBLOW_USING;
+        this.seController.PlayDeathblowSE();
+        Invoke("OnDeathblowEnd", 5.0f);
+    }
+
+    private void OnDeathblowEnd()
+    {
+        this.deathBlowStatus = DEATHBLOW_NO_POWER;
+        this.transform.localScale = this.defaultScale;
     }
 }
