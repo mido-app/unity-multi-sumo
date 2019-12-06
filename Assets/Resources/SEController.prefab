@@ -146,3 +146,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 969787234ba0ff94cb25dba2b4520084, type: 3}
   - {fileID: 8300000, guid: 520f8c6bfe899e24ba9887734fc5e888, type: 3}
   deathbloSeList: {fileID: 8300000, guid: eac0d5bc1df8f2e43a1915e979b5aef5, type: 3}
+  iyoponSe: {fileID: 8300000, guid: b584d775c37a9124f9ed8a42c0d34052, type: 3}

@@ -4,6 +4,7 @@ public class SEController : MonoBehaviour
 {
     public AudioClip[] attackSeList;
     public AudioClip deathbloSeList;
+    public AudioClip iyoponSe;
 
     private AudioSource audioSource;
     // Start is called before the first frame update
@@ -26,5 +27,10 @@ public class SEController : MonoBehaviour
     public void PlayDeathblowSE()
     {
         this.audioSource.PlayOneShot(this.deathbloSeList);
+    }
+
+    public void PlayIyoponSE()
+    {
+        this.audioSource.PlayOneShot(this.iyoponSe);
     }
 }

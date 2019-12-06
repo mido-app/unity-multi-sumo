@@ -109,8 +109,6 @@ MonoBehaviour:
   moveSpeedMin: 0.1
   moveSpeedMax: 0.2
   rotetionSpeed: 10
-  _moveSpeed: 0
-  _moveToward: {x: 0, y: 0, z: 0}
 --- !u!114 &114826277524662622
 MonoBehaviour:
   m_ObjectHideFlags: 0
