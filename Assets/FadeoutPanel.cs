@@ -17,7 +17,6 @@ public class FadeoutPanel : MonoBehaviour
     {
         if (!this._fadeOut) return;
         if (this._image.color.a >= 255) return;
-        Debug.Log(this._image.color.a);
         this._image.color = new Color(
             this._image.color.r,
             this._image.color.g,
