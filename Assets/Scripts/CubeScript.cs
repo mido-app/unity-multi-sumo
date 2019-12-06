@@ -65,7 +65,7 @@ public class CubeScript : MonoBehaviourPunCallbacks
         }
         if (Input.GetKey(KeyCode.Space))
         {
-            rb.AddForce(0, jumpPower, 0);
+            this.OnJump();
         }
         if (Input.GetKey(KeyCode.X) && this.deathBlowStatus == DEATHBLOW_CAN_USE)
         {
@@ -127,7 +127,11 @@ public class CubeScript : MonoBehaviourPunCallbacks
         }
     }
 
-    private void OnDeathblow()
+    public void OnJump(){
+        rb.AddForce(0, jumpPower, 0);
+    }
+
+    public void OnDeathblow()
     {
         this.transform.localScale = this.defaultScale * 1.5f;
         this.deathBlowStatus = DEATHBLOW_USING;
