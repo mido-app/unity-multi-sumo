@@ -96,6 +96,7 @@ public class CubeScript : MonoBehaviourPunCallbacks
         if (other.tag == "Zabuton" && this.deathBlowStatus == DEATHBLOW_NO_POWER)
         {
             this.deathBlowStatus = DEATHBLOW_CAN_USE;
+            Destroy(other.gameObject);
         }
     }
 

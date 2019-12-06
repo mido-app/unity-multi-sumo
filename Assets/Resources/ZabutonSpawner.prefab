@@ -45,6 +45,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zabutonPrehub: {fileID: 700975781504631937, guid: 708762dbb7cc8f6448a39af4b7d5e6fc,
     type: 3}
-  spawnSpanMin: 2
-  spawnSpanMax: 5
+  spawnSpanMin: 10
+  spawnSpanMax: 20
   spawnPointRadius: 30
