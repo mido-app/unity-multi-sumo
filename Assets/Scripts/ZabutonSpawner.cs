@@ -55,6 +55,7 @@ public class ZabutonSpawner : MonoBehaviour
 
     public void Deactivate(Zabuton zabuton)
     {
+        Debug.Log("Deactivate");
         this._inactiveZabutonList.Push(zabuton.gameObject);
         zabuton.gameObject.SetActive(false);
     }
