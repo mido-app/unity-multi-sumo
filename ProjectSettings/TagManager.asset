@@ -6,6 +6,8 @@ TagManager:
   tags:
   - SEController
   - ScoreManager
+  - Zabuton
+  - FadeoutPanel
   layers:
   - Default
   - TransparentFX
