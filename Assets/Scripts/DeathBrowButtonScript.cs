@@ -42,18 +42,5 @@ public class DeathBrowButtonScript : MonoBehaviour
                 }
             }
         }
-
-        
-
-
-
-        // 座布団を取った場合、ボタンの色を活性化
-        // this.GetComponent<Image>().Color = Color.black;
-        /* if (hasZabuton) {
-
-        }else{
-
-        } */
-
     }
 }
