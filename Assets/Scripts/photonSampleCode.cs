@@ -22,7 +22,6 @@ public class photonSampleCode : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         // マッチング後、ランダムな位置に自分自身のネットワークオブジェクトを生成する
-        // Debug.log("successssssss!!!!");
         var v = new Vector3(Random.Range(-4.0f, 4.0f), 0.5f, Random.Range(-4.0f, 4.0f));
         var newPlayerObj = PhotonNetwork.Instantiate("Rikishi", v, Quaternion.identity);
         newPlayerObj.GetComponent<Renderer>().material.color = Random.ColorHSV();
