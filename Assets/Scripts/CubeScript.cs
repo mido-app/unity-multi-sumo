@@ -27,6 +27,7 @@ public class CubeScript : MonoBehaviourPunCallbacks
     private Vector3 defaultScale;
 
     public bool IsMine { get { return photonView.IsMine; } }
+    public bool CanUseDeathBlow { get { return deathBlowStatus == DEATHBLOW_CAN_USE; }}
 
     // Start is called before the first frame update
     void Start()
