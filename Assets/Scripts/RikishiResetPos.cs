@@ -23,9 +23,20 @@ public class RikishiResetPos : MonoBehaviour
         // 原点からの距離が19を超えたプレイヤーは初期位置に戻す
         // また、おおよそdeadZoneオブジェクトのy座標に近づいたら初期位置に戻す
         if (pos.magnitude > 19 || (pos.y - size.y/2) < this.deadZone.gameObject.transform.position.y) {
-            this.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            this.gameObject.transform.position = new Vector3(Random.Range(-4.0f, 4.0f), 3f, Random.Range(-4.0f, 4.0f));
-            this.scoreManager.AddFallCount();
+            dead();
         }
+
+        // Rキー押下で死亡（押し続けている間も死亡）
+        if (Input.GetKey(KeyCode.R)){
+            dead();
+        }
+
+
+    }
+
+    void dead(){
+        this.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        this.gameObject.transform.position = new Vector3(Random.Range(-4.0f, 4.0f), 3f, Random.Range(-4.0f, 4.0f));
+        this.scoreManager.AddFallCount();
     }
 }
