@@ -47,6 +47,8 @@ public class Zabuton : MonoBehaviour
 
     public void Deactivate()
     {
-        this._spawnBy.Deactivate(this);
+        if (this._spawnBy != null) {
+            this._spawnBy.Deactivate(this);
+        }
     }
 }
