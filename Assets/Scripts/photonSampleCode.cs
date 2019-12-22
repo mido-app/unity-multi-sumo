@@ -14,8 +14,13 @@ public class photonSampleCode : MonoBehaviourPunCallbacks
     // マスターサーバーへの接続が成功した時に呼ばれるコールバック
     public override void OnConnectedToMaster()
     {
+        RoomOptions roomOptions = new RoomOptions(); 
+        // 全プレイヤーのUserIdを共有できるように設定
+        roomOptions.PublishUserId = true;   
+
         // "room"という名前のルームに参加する（ルームが無ければ作成してから参加する）
-        PhotonNetwork.JoinOrCreateRoom("room", new RoomOptions(), TypedLobby.Default);
+        PhotonNetwork.JoinOrCreateRoom("room", roomOptions, TypedLobby.Default);
+        
     }
 
     // マッチングが成功した時に呼ばれるコールバック
@@ -25,5 +30,18 @@ public class photonSampleCode : MonoBehaviourPunCallbacks
         var v = new Vector3(Random.Range(-4.0f, 4.0f), 0.5f, Random.Range(-4.0f, 4.0f));
         var newPlayerObj = PhotonNetwork.Instantiate("Rikishi", v, Quaternion.identity);
         newPlayerObj.GetComponent<Renderer>().material.color = Random.ColorHSV();
+
+        if (PhotonNetwork.InRoom)
+        {
+            // プレイヤーごとにfallCountなどの値をRoomのCustomPropertyに登録
+            ExitGames.Client.Photon.Hashtable customRoomProperties = PhotonNetwork.CurrentRoom.CustomProperties;
+            customRoomProperties[PhotonNetwork.LocalPlayer.UserId] = 0;
+            PhotonNetwork.CurrentRoom.SetCustomProperties(customRoomProperties);
+            PhotonNetwork.LocalPlayer.NickName = "name";  // TODO: titleシーンから入力し設定する
+        }
     }
+
+    private void Update(){
+         
+    }    
 }
