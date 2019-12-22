@@ -13,6 +13,10 @@ public class NameInputFieldScript : MonoBehaviour
         inputField = GetComponent<InputField>();
         startButton.GetComponent<Button>().interactable = false;
     }
+
+    public void setTextArea(string text) {
+        inputField.text = text;
+    }
  
     public void setPlayerName()
     {
