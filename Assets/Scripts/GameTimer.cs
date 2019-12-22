@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
-public class GameTimer : MonoBehaviour
+public class GameTimer : MonoBehaviourPunCallbacks
 {
     public int gameTimeSec = 300;
     private float _timeSpentSec = 0.0f;
     private Text _textUI;
     private bool _gameEnded = false;
+    private ExitGames.Client.Photon.Hashtable customRoomProperties;
+    public static readonly string PROP_GAME_TIMER_KEY = "gameTimer";
+    private string before_textUI;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +23,20 @@ public class GameTimer : MonoBehaviour
     {
         this._timeSpentSec += Time.deltaTime;
         this.UpdateUI();
+        
+        // 経過時間をroomのCustomPropertyに保存する（後から入ってきたプレイヤーと経過時間を共有するため）
+        // 画面に表示する経過時間に変更があった場合のみ以下を実行
+        if (PhotonNetwork.InRoom && this.before_textUI != this._textUI.text)
+        {   
+            // Room内のカスタムプロパティ取得
+            this.customRoomProperties = PhotonNetwork.CurrentRoom.CustomProperties;    
+            
+            // 経過時間をroomのCustomPropertyに保存    
+            this.customRoomProperties[PROP_GAME_TIMER_KEY] = this._timeSpentSec;
+            PhotonNetwork.CurrentRoom.SetCustomProperties(this.customRoomProperties);
+            
+            this.before_textUI = this._textUI.text;
+        }
     }
 
     private void UpdateUI()
@@ -35,5 +53,16 @@ public class GameTimer : MonoBehaviour
         int minute = (int)(remainedTime / 60);
         int second = (int)(remainedTime % 60);
         this._textUI.text = string.Format("{0:00}:{1:00}", minute, second);
+    }
+
+    // Roomに入った時に呼ばれるコールバック
+    public override void OnJoinedRoom()
+    {
+        // Room内のカスタムプロパティ取得
+        this.customRoomProperties = PhotonNetwork.CurrentRoom.CustomProperties;
+        // ゲームの経過時間がCustomPropertyに存在するなら、それを読み込み自身の経過時間とする
+        if (this.customRoomProperties[PROP_GAME_TIMER_KEY] != null) {
+            this._timeSpentSec = (float)this.customRoomProperties[PROP_GAME_TIMER_KEY];
+        }
     }
 }

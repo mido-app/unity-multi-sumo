@@ -21,7 +21,6 @@ public class photonSampleCode : MonoBehaviourPunCallbacks
         // "room"という名前のルームに参加する（ルームが無ければ作成してから参加する）
         PhotonNetwork.JoinOrCreateRoom("room", roomOptions, TypedLobby.Default);
         PhotonNetwork.NickName = "empty";
-        
     }
 
     // マッチングが成功した時に呼ばれるコールバック

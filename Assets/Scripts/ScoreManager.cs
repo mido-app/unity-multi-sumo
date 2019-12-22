@@ -23,6 +23,8 @@ public class ScoreManager : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.InRoom)
         {   
+            // Room内のカスタムプロパティ取得
+            customRoomProperties = PhotonNetwork.CurrentRoom.CustomProperties;    
             // Roomにいる全プレイヤーに対して以下を実施
             // プレイヤーのUserIDを取得 → UserIDに紐づけたfallCountを取得 → スコア表に表示
             StringBuilder displaySb = new StringBuilder();
@@ -32,7 +34,7 @@ public class ScoreManager : MonoBehaviourPunCallbacks
                 displaySb.Append(p.NickName + " Fall Count : " + customRoomProperties[p.UserId] + "\n");
             }
             Text fallText = fallObject.GetComponent<Text>();
-            fallText.text = displaySb.ToString();
+            fallText.text = displaySb.ToString();         
         }
     }
 

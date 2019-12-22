@@ -109,9 +109,10 @@ public class CubeScript : MonoBehaviourPunCallbacks
         if (collision.gameObject.tag != "Player") return;
         var vector = collision.gameObject.transform.position - this.transform.position;
         var unitVector = vector / Vector3.Magnitude(vector);
-        var speedVector = unitVector * buttobiPower * Vector3.Magnitude(this.rb.velocity);
-        collision.gameObject.GetComponent<Rigidbody>().AddForce(speedVector, ForceMode.Impulse);
-
+        if (this.rb != null){
+            var speedVector = unitVector * buttobiPower * Vector3.Magnitude(this.rb.velocity);
+            collision.gameObject.GetComponent<Rigidbody>().AddForce(speedVector, ForceMode.Impulse);
+        }
         // SEを鳴らす
         if (photonView.IsMine)
         {
