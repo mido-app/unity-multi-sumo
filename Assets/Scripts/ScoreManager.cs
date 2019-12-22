@@ -27,7 +27,7 @@ public class ScoreManager : MonoBehaviourPunCallbacks
             // プレイヤーのUserIDを取得 → UserIDに紐づけたfallCountを取得 → 画面右上に表示
             StringBuilder displaySb = new StringBuilder();
             foreach (var p in PhotonNetwork.PlayerList){
-                displaySb.Append(p.NickName + " Fall Count:" + customRoomProperties[p.UserId] + "\n");
+                displaySb.Append(p.NickName + " Fall Count : " + customRoomProperties[p.UserId] + "\n");
             }
             Text fallText = fallObject.GetComponent<Text>();
             fallText.text = displaySb.ToString();

@@ -38,6 +38,7 @@ public class photonSampleCode : MonoBehaviourPunCallbacks
             ExitGames.Client.Photon.Hashtable customRoomProperties = PhotonNetwork.CurrentRoom.CustomProperties;
             customRoomProperties[PhotonNetwork.LocalPlayer.UserId] = 0;
             PhotonNetwork.CurrentRoom.SetCustomProperties(customRoomProperties);
+            // プレイヤー名登録
             PhotonNetwork.NickName = NameInputFieldScript.getPlayerName();
         }
     }
