@@ -5,7 +5,7 @@ using System.Collections;
 public class NameInputFieldScript : MonoBehaviour
 {
     private InputField inputField;
-    public static string playerNamePrefKey = "";
+    public static string playerName = "";
     public GameObject startButton;
 
     void Start()
@@ -16,12 +16,16 @@ public class NameInputFieldScript : MonoBehaviour
  
     public void SetPlayerName()
     {
-        playerNamePrefKey = inputField.text;
+        playerName = inputField.text;
 
-        if(playerNamePrefKey == "") {
+        if(playerName == "") {
             startButton.GetComponent<Button>().interactable = false;
         } else{
             startButton.GetComponent<Button>().interactable = true;
         }
-    }   
+    }  
+
+    public void getPlayerName(){
+        return playerName;
+    } 
 }

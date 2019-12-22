@@ -20,6 +20,7 @@ public class photonSampleCode : MonoBehaviourPunCallbacks
 
         // "room"という名前のルームに参加する（ルームが無ければ作成してから参加する）
         PhotonNetwork.JoinOrCreateRoom("room", roomOptions, TypedLobby.Default);
+        PhotonNetwork.NickName = "empty";
         
     }
 
@@ -37,7 +38,7 @@ public class photonSampleCode : MonoBehaviourPunCallbacks
             ExitGames.Client.Photon.Hashtable customRoomProperties = PhotonNetwork.CurrentRoom.CustomProperties;
             customRoomProperties[PhotonNetwork.LocalPlayer.UserId] = 0;
             PhotonNetwork.CurrentRoom.SetCustomProperties(customRoomProperties);
-            // PhotonNetwork.LocalPlayer.NickName = NameInputFieldScript.getPlayerName();  // TODO: titleシーンから入力し設定する
+            PhotonNetwork.NickName = NameInputFieldScript.getPlayerName();
         }
     }
 
