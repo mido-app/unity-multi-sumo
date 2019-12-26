@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | Sumou</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <script src="TemplateData/UnityProgress.js"></script>
+    <script src="Build/UnityLoader.js"></script>
+    <script>
+      var gameInstance = UnityLoader.instantiate("gameContainer", "Build/webBuild.json", {onProgress: UnityProgress});
+    </script>
+    
+    <!-- アドレスバー等のブラウザのUIを非表示 -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- default（Safariと同じ） / black（黒） / black-translucent（ステータスバーをコンテンツに含める） -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- ホーム画面に表示されるアプリ名 -->
+    <meta name="apple-mobile-web-app-title" content="R-Multi-Sumou">
+    <!-- ホーム画面に表示されるアプリアイコン -->
+    <link rel="apple-touch-icon" href="images/icons/sumou.png">
+  </head>
+  <body>
+    <div class="webgl-content">
+      <div id="gameContainer" style="width: 960px; height: 550px"></div>
+      <!-- <div class="footer">
+        <div class="webgl-logo"></div>
+        <div class="fullscreen" onclick="gameInstance.SetFullscreen(1)"></div>
+        <div class="title">Sumou</div>
+      </div> -->
+    </div>
+  </body>
+</html>
